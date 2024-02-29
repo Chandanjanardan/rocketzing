@@ -1,0 +1,10 @@
+.custom-modal {
+    background-color: rgba(0, 0, 0, 0.8); /* Black with some transparency */
+    color: #ffffff; /* Text color */
+    text-align: center; /* Center align text */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+  }
+  
