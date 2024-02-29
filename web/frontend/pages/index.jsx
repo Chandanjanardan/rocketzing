@@ -6,6 +6,9 @@ const IndexPage = () => {
   const [popupData, setPopupData] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [impressionId, setImpressionId] = useState('');
 
   useEffect(() => {
     // Fetch data from the API and setPopupData when component mounts
@@ -29,6 +32,7 @@ const IndexPage = () => {
       );
       const data = await response.json();
       setPopupData(data);
+      setImpressionId(data.impressionId);
     } catch (error) {
       console.error('Error fetching popup data:', error);
     }
@@ -37,6 +41,31 @@ const IndexPage = () => {
   // Function to handle changes in the email input field
   const handleEmailChange = (value) => {
     setEmail(value);
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        email,
+        storeKey: 'beautiful-disaster-clothing.myshopify.com',
+        impressionId,
+      };
+      const response = await fetch('https://zing-api-prod.herokuapp.com/optin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      console.log('Opt-in response:', data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,7 +90,9 @@ const IndexPage = () => {
                 onChange={handleEmailChange}
               />
               {/* Submit button */}
-              <Button primary>{popupData.template.optInButton.text}</Button>
+              <Button primary onClick={handleSubmit} loading={loading}>
+                {popupData.template.optInButton.text}
+              </Button>
               {/* No Thanks link */}
               <Stack spacing="tight" distribution="center">
                 <Image

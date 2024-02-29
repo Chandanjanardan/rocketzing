@@ -13,6 +13,7 @@ import { Banner, Layout, Page } from "@shopify/polaris";
  * See: https://shopify.dev/apps/tools/app-bridge/getting-started/using-react
  */
 export function AppBridgeProvider({ children }) {
+  let apiKey="f16ff697c65534e98b0ed5486af11834"
   const location = useLocation();
   const navigate = useNavigate();
   const history = useMemo(
@@ -28,6 +29,7 @@ export function AppBridgeProvider({ children }) {
     () => ({ history, location }),
     [history, location]
   );
+  console.log(process.env.SHOPIFY_API_KEY,"this is process env")
 
   // The host may be present initially, but later removed by navigation.
   // By caching this in state, we ensure that the host is never lost.
@@ -43,13 +45,14 @@ export function AppBridgeProvider({ children }) {
 
     return {
       host,
-      apiKey: process.env.SHOPIFY_API_KEY,
+      // apiKey:process.env.SHOPIFY_API_KEY ,
+      apiKey,
       forceRedirect: true,
     };
   });
 
-  if (!process.env.SHOPIFY_API_KEY || !appBridgeConfig.host) {
-    const bannerProps = !process.env.SHOPIFY_API_KEY
+  if (!apiKey || !appBridgeConfig.host) {
+    const bannerProps = !apiKey
       ? {
           title: "Missing Shopify API Key",
           children: (

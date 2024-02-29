@@ -2,7 +2,7 @@
 
 client_id = "f16ff697c65534e98b0ed5486af11834"
 name = "node-app"
-application_url = "https://wit-spoken-finder-sheffield.trycloudflare.com"
+application_url = "https://donations-penn-smithsonian-centres.trycloudflare.com"
 embedded = true
 
 [build]
@@ -16,9 +16,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://wit-spoken-finder-sheffield.trycloudflare.com/auth/callback",
-  "https://wit-spoken-finder-sheffield.trycloudflare.com/auth/shopify/callback",
-  "https://wit-spoken-finder-sheffield.trycloudflare.com/api/auth/callback"
+  "https://donations-penn-smithsonian-centres.trycloudflare.com/auth/callback",
+  "https://donations-penn-smithsonian-centres.trycloudflare.com/auth/shopify/callback",
+  "https://donations-penn-smithsonian-centres.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
